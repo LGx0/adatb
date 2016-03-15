@@ -1,0 +1,2 @@
+# adatb
+Adatbázisalapú rendszerek
