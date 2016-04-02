@@ -1,27 +1,31 @@
 @charset "UTF-8";
 
 html {
-    background-color: #F0E68C;
+    background-color:#F0E68C;
 }
 
 body {
 	font-family:Arial, Helvetica, sans-serif;
-	width: 1100px;
-	margin: 0 auto;
+	width:1100px;
+	margin:0 auto;
 }
 
-#fejlec h1 {
+.clear{
+	clear:both;
+}
+
+#fejlec{
 	text-align:center;
 }
 
 .belepes_doboz{
-	float: left;
-	width: 40%;
+	float:left;
+	width:40%;
 }
 
 .login_kep{
-	float: right;
-	width: 40%;
+	float:right;
+	width:40%;
 }
 
 .myButton {
@@ -64,7 +68,8 @@ body {
 }
 
 .menu ul, .center-align{
-    text-align: center;
+    text-align:center;
+	padding:0;
 }
 
 .menu li a {
@@ -78,26 +83,61 @@ body {
 }
 
 .error {
-	color: red;
+	color:red;
 }
 
 .table-center{
-	margin: 0 auto;
+	margin:0 auto;
+}
+
+.table-width{
+	width:60%;
+}
+
+.text-center{
+	text-align:center;
+}
+
+.bal-doboz{
+	float:left;
+	width:50%;
+}
+
+.jobb-doboz{
+	float:right;
+	width:50%;
 }
 
 #termek {
-	background-color:black;
+	background-color:#191970;
 	padding:10px;
 	border-radius:10px;
-	margin-left:100px;
-	margin-right:300px;
+	margin:0 auto;
+    width:560px;
 }
 
-#termek #jateknev, #termek #jatekkategoria, #ar,#darab {
+#termek b p{
+	color:#F0F8FF;
+}
+
+#termek a, #termek span{
+	text-decoration:none;
+	color:#F0F8FF;
+}
+
+.kosar {
+	background-color:#191970;
+	padding:10px;
+	border-radius:10px;
+	margin:0 auto;
+    width:560px;
+}
+
+#termek form , .kosar .tartalma{
 	background-color:grey;
 	padding:10px;
 	border-radius:10px;
-	width:100%;
+	width:96%;
 }
 
 #mennyiseg {
@@ -109,11 +149,30 @@ body {
 
 	padding:10px;
 	border-radius:10px;
-	width:50%;
+	width:96%;
 
 }
 
+.dis-input{
+	pointer-events:none;
+}
+
+#adminuser td a{
+	text-decoration:none;
+	color:blue;
+	font-weight:bold;
+}
+
+#adminf{
+	width: 50%;
+}
+
+.admin-termek{
+	width: 40%;
+    margin: 20px auto;
+}
+
 input[type="text"]:disabled {
-    background-color: grey;
+    background-color:grey;
 	color:white;
 }

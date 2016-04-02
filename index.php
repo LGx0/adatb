@@ -1,5 +1,6 @@
 ﻿<?php 
 	session_start();
+	require_once("oracleconn.php");
 	if(isset($_GET['menu'])) $menu=$_GET['menu'];
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -17,8 +18,23 @@
 		
 		<div id="tartalom">
 			<div class="menu">
+				<?php
+					if( isset($_SESSION['azon']) && isset($menu)){
+				?>
+				<div>
+					<p>Bejelentkezve: <b><?php 
+						if(isset($menu) && $menu === "admin" || $menu === "adminuser"){
+							echo $_SESSION['azon'];
+						}else{
+							echo felhasznalo_neve($conn, $_SESSION['azon']); 
+						}
+					?></b> </p>
+				</div>
+				<?php
+					};
+				?>
 				<ul>
-					<?php
+				<?php
 					if(!isset($_GET['tartalom'])){
 						echo "<li class='menupont myButton'><a href='index.php?tartalom=reg.php&menu=reg'>Regisztráció</a></li>";
 					}else{
@@ -43,7 +59,6 @@
 									<li class='menupont myButton'><a href = 'index.php?tartalom=termekek.php&menu=fooldal'>Termékek böngészése</a></li>
 									<li class='menupont myButton'><a href ='index.php?tartalom=kosar.php&menu=fooldal'>Kosárban:<?php echo $_SESSION['kosarban']; ?></a></li>
 									<li class='menupont myButton' ><a  href='kileptet.php'>Kilépés</a></li>
-									<li  id ='azon'><?php echo $_SESSION['azon']; ?></li>
 								<?php	
 								break;
 							case "adminuser":
@@ -51,20 +66,20 @@
 								break;
 						};
 					}
-
-					?>
 					
+					?>
 				</ul>
+				
 			</div>
 			<?php
 				if(isset($_GET['tartalom'])){
 					$_GET['menu']="tartalom";
 					include($_GET['tartalom']);
 				}else{
-					
 					include('tartalom.php');
 				}
 			?>
+			<div class="clear"></div>
 		</div>
 		
 		

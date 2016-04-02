@@ -14,7 +14,7 @@ $insertstirng=("INSERT INTO TERMEKEK (NEV,KATEGORIA, BESZ_AR,ELAD_AR, ELADOTT_ME
 $insert=oci_parse($conn,$insertstirng);
 oci_execute($insert);
 
-/*header('Location:admintermekek.php');*/
+header('Location:index.php?tartalom=admintermekek.php&menu=admin');
 
 
 

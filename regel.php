@@ -100,7 +100,12 @@ and (($_SESSION["hszErr"])=="") and (($_SESSION["bszErr"])==""))
 
 }
 
-header ('Location:index.php?tartalom=reg.php');
+if($_SESSION['menu'] === "admin"){
+	header ('Location:index.php?tartalom=adminvasarlok.php&menu=adminuser');
+}else{
+	header ('Location:index.php?tartalom=reg.php&menu=reg');
+}
+//header ('Location:index.php?tartalom=reg.php');
 
 
 

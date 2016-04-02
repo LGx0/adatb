@@ -1,4 +1,4 @@
-﻿<form method="post" action="regel.php" >
+﻿<form class="table-center" style="width:70%" method="post" action="regel.php" >
 	<fieldset id="f1"> 
 		<legend><b>Regisztrációhoz szükséges adatok</b></legend>
 		

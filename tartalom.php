@@ -1,5 +1,6 @@
 <?php
 	$_SESSION['menu'] = "tartalom";
+	unset($_SESSION['azon']);
 ?>
 <div class="belepes_doboz">
 	<form method="post" action="belepes.php">

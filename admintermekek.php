@@ -14,12 +14,12 @@
 	<li class='menupont myButton'><a href='index.php'>Kilépés</a></li>
 </ul>-->
 	<p>Rendezés alapja:</p>
-	<form method="post" action="admintermekek.php">
+	<form method="post" action="index.php?tartalom=admintermekek.php&menu=admin">
 		<select name ="rendezes">
 		  <option value="NEV">Név</option>
 		  <option value="KOD">Termékkód</option>
 		  <option value="KATEGORIA">Kategória</option>
-		  <option value="BESZ_AR">Beszerzási ár</option>
+		  <option value="BESZ_AR">Beszerzési ár</option>
 		  <option value="ELAD_AR">Eladási ár</option>
 		  <option value="ELADOTT_MENNYISEG">Eladott mennyiség</option>
 		  <option value="ELADOTT_MENNYISEG">Felvétel dátuma</option>
@@ -30,9 +30,9 @@
 		$selectstring = ("SELECT * FROM TERMEKEK ORDER BY $rendezes DESC");
 		$select = oci_parse($conn,$selectstring);
 		oci_execute($select);
-		echo "<table border=\"1\">";
+		echo "<table class=\"table-center\" border=\1\">";
 		?>
-		<tr><th>Név</th><th>Temékkód</th><th>Kategória</th><th>Beszerzási ár</th>
+		<tr><th>Név</th><th>Temékkód</th><th>Kategória</th><th>Beszerzési ár</th>
 		<th>Eladási ár</th><th>Eladott mennyiség(db)</th><th>Felvétel dátuma</th><th>Módosítás</th></tr>
 		<?php
 		while ($row = oci_fetch_array($select, OCI_ASSOC+OCI_RETURN_NULLS)) {
@@ -57,7 +57,7 @@
 					
 						
 						?>
-						<td><input type="submit" value="Módosít" name="modosit"/></td>
+						<td class="text-center"><input type="submit" value="Módosít" name="modosit"/></td>
 						<?php
 						
 						
@@ -69,13 +69,15 @@
 		
 </div>
 <div id ="termekfelvetel">
-	<p>Új termék felvétele:</p>
+<fieldset class="admin-termek"> 
+	<legend><b>Új termék felvétele</b></legend>
 	<form method="post" action="ujtermek.php">
-		<p>Név:<input type="text" name="nev"/></p>
-		<p>Kategótia:<input type="text" name="kategoria"/></p>
-		<p>Beszerzési ár:<input type="text" name="beszar"/></p>
-		<p>Eladási ár:<input type="text" name="eladar"/></p>
+		<p>Név: <input type="text" name="nev"/></p>
+		<p>Kategótia: <input type="text" name="kategoria"/></p>
+		<p>Beszerzési ár: <input type="text" name="beszar"/></p>
+		<p>Eladási ár: <input type="text" name="eladar"/></p>
 		<p><input type="submit" name="submit" value="Mentés"/></p>
 	</form>
+</fieldset>
 </div>
 
