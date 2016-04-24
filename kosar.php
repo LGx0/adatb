@@ -5,13 +5,16 @@ if(!(isset($_SESSION['azon'])))
 header ('Location: index.php');
 }
 ?>
-	<div class="kosar text-center">
-		<div class="tartalma text-center">
+	<?php
+		if(!empty($_SESSION['kosar'])){
+	?>
+	<div class="text-center">
+		<div class="text-center">
 			<?php
 				echo "<table class='table-center' border='1'>\n";
-			?>
-			<tr><th>Játék neve</th> <th> Kategória</th> <th> Ár </th> <th>Mennyiség</th> <th>Összeg</th> <th>Tétel törlése</th></tr>
-			<?php
+			
+			echo "<tr><th>Játék neve</th> <th> Kategória</th> <th> Ár </th> <th>Mennyiség</th> <th>Összeg</th> <th>Tétel törlése</th></tr>";
+			
 				$_SESSION['vegosszeg'] = 0;
 				
 				foreach($_SESSION['kosar'] as $termekkod => $mennyiseg)
@@ -35,4 +38,9 @@ header ('Location: index.php');
 			?>
 		</div>
 	</div>
+	<?php
+		}else{
+			echo "<div class='text-center'><p>A kosarad üres!\n</p></div>";
+		}
+	?>
  		

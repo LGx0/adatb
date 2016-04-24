@@ -7,9 +7,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="hu">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<link rel="icon" href="Kepek/icon2.png">
-		<title>Webáruház</title>
+		<link rel="icon" href="Kepek/icon.png">
 		<link rel="stylesheet" type="text/css" href="style.css" />
+		<title>Webáruház</title>
 	</head>
 	<body>
 		<div id="fejlec">
@@ -57,7 +57,7 @@
 									<li class='menupont myButton' ><a id='jelenlegi' href='index.php?tartalom=fooldal.php&menu=fooldal'>Főoldal</a></li>
 									<li class='menupont myButton'><a href = 'index.php?tartalom=adatok.php&menu=fooldal'>Felhasználói adatok</a></li>
 									<li class='menupont myButton'><a href = 'index.php?tartalom=termekek.php&menu=fooldal'>Termékek böngészése</a></li>
-									<li class='menupont myButton'><a href ='index.php?tartalom=kosar.php&menu=fooldal'>Kosárban:<?php echo $_SESSION['kosarban']; ?></a></li>
+									<li class='menupont myButton'><a href ='index.php?tartalom=kosar.php&menu=fooldal'>Kosárban: <?php echo $_SESSION['kosarban']; ?> db termék</a></li>
 									<li class='menupont myButton' ><a  href='kileptet.php'>Kilépés</a></li>
 								<?php	
 								break;

@@ -2,9 +2,6 @@
 session_start ();
 require_once("oracleconn.php");
 
-
-
-
 $_SESSION["jelErr2"] = "";
 
 $_SESSION["jel2Err2"] = "";
@@ -21,8 +18,6 @@ $_SESSION["bszErr2"] = "";
 
 if(!isset($_POST["jelsz"]))
 {$_POST["jelsz"] = "";}
-
-
 
 if(!isset($_POST["ujjelsz"]))
 {$_POST["ujjelsz"] = "";}
@@ -44,8 +39,6 @@ if(!isset($_POST["banksz"]))
 
 
 $email = $_SESSION['azon'];
-
-
 
 	$jelszo = trim($_POST['jelsz']);
 	echo $jelszo;

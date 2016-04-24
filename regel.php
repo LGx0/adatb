@@ -105,7 +105,6 @@ if($_SESSION['menu'] === "admin"){
 }else{
 	header ('Location:index.php?tartalom=reg.php&menu=reg');
 }
-//header ('Location:index.php?tartalom=reg.php');
 
 
 

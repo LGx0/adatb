@@ -21,7 +21,7 @@
 		<label for = "nev" id = "nevl">
 		<span id = "nevs">			
 		<input type = "text" size = "20"	maxlength = "30" name = "nev" id = "nev"  />
-		<span class="error"><?php echo @$_SESSION["nevErr"]; ?></span></span> <!-- meg kell nézni mekkora lesz- az eltárolt sztring és miket kell eltárolni-->
+		<span class="error"><?php echo @$_SESSION["nevErr"]; ?></span></span>
 		<br/><br/>
 		<label for = "irszam">Irányító szám:</label>					
 		<span id = "irszams">

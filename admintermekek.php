@@ -10,9 +10,6 @@
 	$_SESSION['menu'] = "admin";
 ?>
 <div id="termekadatok">
-<!--<ul>
-	<li class='menupont myButton'><a href='index.php'>Kilépés</a></li>
-</ul>-->
 	<p>Rendezés alapja:</p>
 	<form method="post" action="index.php?tartalom=admintermekek.php&menu=admin">
 		<select name ="rendezes">

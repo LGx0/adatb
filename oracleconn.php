@@ -42,7 +42,6 @@ function felhasznalo_neve($connection, $email){
 	return $name;
 }
 
-
 function felhaszn_keres($connection, $email){
 $returnvalue = false;
 $find = oci_parse($connection, "SELECT * FROM Vasarlok WHERE email = $email ");
@@ -53,9 +52,6 @@ if ($returnvalue == true)
 	{	@$_SESSION["emailErr"] = "Ezzel az e-mail címmel már regisztráltak egyszer!";}
 return $returnvalue;
 }
-
-
-
 
 function legnepszerubb($connection)
 {
@@ -68,7 +64,7 @@ oci_execute($find);
 
 echo "<table class='table-center table-width' border='1'>\n";
 ?>
-<tr><th>játék neve</th> <th> kategória</th> <th> ár </th> </tr>
+<tr><th>Játék neve</th> <th> Kategória</th> <th> Ár </th> </tr>
 <?php
 while ($row = oci_fetch_array($find, OCI_ASSOC+OCI_RETURN_NULLS)) {
 		echo "<tr>\n";
@@ -97,7 +93,7 @@ function kategoriak($connection){
 				$find2 = oci_parse($connection,$select2);
 				oci_execute($find2);
 				echo "<table  class='table-center table-width' border='1'>\n";
-				?><tr><th>játék neve</th> <th> ár </th> </tr><?php
+				?><tr><th>Játék neve</th> <th> Ár </th> </tr><?php
 				while ($row2 = oci_fetch_array($find2, OCI_ASSOC+OCI_RETURN_NULLS)) {
 					echo "<tr>\n";
 						echo "<td><a target=\"_blank\" href =\"index.php?tartalom=termek.php&menu=fooldal&termekid=".$row2['KOD']."\">" . $row2['NEV'] . "</a></td>";
@@ -198,47 +194,7 @@ function vasarolt_termekek($connection,$email)
 		echo "<p class=\"text-center\">Nincs megvásárolt terméke!</p> \n";
 	}
 }
-/*
-function kategoriadropdwon($connection){
-	$select =("SELECT DISTINCT KATEGORIA FROM TERMEKEK");
-	$find = oci_parse($connection,$select);
-	oci_execute($find);
-	?> <select name="kategoriak" > <?php
-	while ($row = oci_fetch_array($find, OCI_ASSOC+OCI_RETURN_NULLS)){
-		foreach ($row as $kategoria){
-		echo("<option value=\"  $kategoria  \"> $kategoria  </option>");	
-		}
-	}
-	echo "</select>";
 
-}
-
-function kategoriakilistaz($connection,$category){
-	$select =("SELECT nev,kategoria, elad_ar, kod FROM TERMEKEK WHERE KATEGORIA = '$category'");
-	$find = oci_parse($connection,$select);
-	oci_execute($find);
-	echo "<table border='1'>\n";
-	?> <caption><?php echo $category?>ok</caption>
-	<tr><th>játék neve</th> <th> kategória</th> <th> ár </th> </tr><?php
-	
-	while ($row = oci_fetch_array($find, OCI_ASSOC+OCI_RETURN_NULLS)) {
-			echo "<tr>";
-				
-				
-					echo "<td><a target=\"_blank\" href =\"index.php?tartalom=termek.php&menu=fooldal&termekid=".$row['KOD']."\">" . $row['NEV'] . "</a></td>";
-				
-					echo "<td>" .$row['KATEGORIA'] ."</td>";
-					
-					
-					echo " <td>" .$row['ELAD_AR'] ."</td>";
-			
-			echo "</tr>";
-	}
-	echo "</table>\n";
-	
-
-}
-*/
 function egyenlegfeltolt($connection, $email,$osszeg)
 {
 	
@@ -335,9 +291,9 @@ function kapcsolódó_termék($connection,$termekkod){
 
 function vasarolni_kivant_termekek($connection,$termekkod,$mennyiseg){
 		
-		$select_termek_string=("SELECT * FROM TERMEKEK WHERE KOD = $termekkod");
-		$select_termek =oci_parse($connection,$select_termek_string);
-		oci_execute($select_termek);
+	$select_termek_string=("SELECT * FROM TERMEKEK WHERE KOD = $termekkod");
+	$select_termek =oci_parse($connection,$select_termek_string);
+	oci_execute($select_termek);
 		
 		
 		
@@ -349,7 +305,7 @@ function vasarolni_kivant_termekek($connection,$termekkod,$mennyiseg){
 						echo "<td>" . $row['NEV'] . "</td>";
 						echo "<td>" . $row['KATEGORIA'] ."</td>";
 						echo " <td>" . $row['ELAD_AR'] ." Ft</td>";
-						echo " <td>" . $mennyiseg ."</td>";
+						echo " <td>" . $mennyiseg ." darab</td>";
 						echo " <td>" . ($mennyiseg * $row['ELAD_AR']) ."  Ft</td>";
 						echo"<input type=\"hidden\" value=\"".$row['KOD']."\" name=\"termekkod\"/>";
 						echo"<input type=\"hidden\" value=\"".$mennyiseg."\" name=\"mennyiseg\"/>";
@@ -363,8 +319,6 @@ function vasarolni_kivant_termekek($connection,$termekkod,$mennyiseg){
 }
 
 function megvasarol($connection,$email){
-	
-	
 	
 	$insert_vasarlasok_string=("INSERT INTO VASARLASOK (VASARLO_EMAIL, FELVETEL)
 	VALUES ('$email',SYSDATE)");
