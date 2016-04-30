@@ -1,0 +1,20 @@
+Internetes áruház modellezése SSADM-mel. A megvalósítás történhet webes felületen és stand-alone alkalmazással is.
+Példa: Amazon.com, http://www.220volt.hu/, Apple iTunes
+
+Követelmények:
+
+	Egy fõs csapatok
+Termékek és árak kezelése az adatbázisban
+Árukategóriák megadása
+Felhasználók regisztrálása, beléptetése
+Vásárlói egyenleg beállítása felhasználóknál
+Vásárolt termékek állapota (nincs fizetve, fizetve, kiszállítva) (a kiszállítást csak az adminisztrátori felületen lehet beállítani, lehetõleg minden szállítást akkorra ütemezzünk, amikor más termékeket is szállítunk az adott városba)
+Új termékek ajánlása a kezdõ oldalon (5-5 kategóriánként)
+Felhasználók lapján a vásárolt termékek listája
+Kiszállítandó termékek listázása adminisztrátori felületen a kiszállítási határidõ szerint csoportosítva. (Feltételezzük, hogy 5 nap áll rendelkezésre a kiszállításra.)
+
+	Két fõs csapatok
+Legnépszerûbb termékek listázása a vásárlás alapján, kategóriákban csoportosítva.
+Termékek ajánlása az alapján, hogy mások mit vásároltak még, akik megvették a terméket
+Vásárlás menete, egyenleg feltöltés
+Számla kiállítása a vásárlásról, számlák tárolása a rendszerben
