@@ -4,10 +4,11 @@
 	$selectstring = ("SELECT * FROM SZALLITASOKVIEW");
 	$select = oci_parse($conn,$selectstring);
 	oci_execute($select);
+	echo " <p class='text-center'>Kiszállítások koordinálása:</p>";
 	echo "<table class='table-center' border=\"1\">";
 ?>
 
-<tr><th>Szállítás azonosítója</th><th>Esedékessége</th><th>Vásrálás azonosítója</th><th>Vásárló neve</th><th>Lakhely</th><th>Elküldés</th></tr>
+<tr><th>Szállítás azonosítója</th><th>Esedékessége</th><th>Vásárlás azonosítója</th><th>Vásárló neve</th><th>Lakhely</th><th>Elküldés</th></tr>
 	
 <?php
 	while ($row = oci_fetch_array($select, OCI_ASSOC+OCI_RETURN_NULLS)) {
@@ -40,4 +41,6 @@
 			echo "</tr></form>" ;
 	}
 	echo "</table>\n";
+	echo " <br/>";
+	varosonkenti_rendelt($conn);
 ?>

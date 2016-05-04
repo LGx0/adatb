@@ -87,9 +87,13 @@ function kategoriak($connection){
 			$counter++;
 			echo "<div class='text-center ";if($counter % 2 == 0){ echo "jobb-doboz";}else{ echo "bal-doboz";}echo "'>";
 				echo "<h2>" . $kategoria ."</h2>";
-				$select2 =("SELECT NEV, ELAD_AR, KOD FROM 
-				(SELECT *  FROM TERMEKEK WHERE KATEGORIA = '$kategoria' ORDER BY FELVETEL_DATUMA DESC )
-				WHERE ROWNUM <=5");
+				$select2 =("SELECT NEV, ELAD_AR, KOD 
+							FROM 
+								(SELECT * 
+									FROM TERMEKEK 
+									WHERE KATEGORIA = '$kategoria' 
+									ORDER BY FELVETEL_DATUMA DESC )
+							WHERE ROWNUM <=5");
 				$find2 = oci_parse($connection,$select2);
 				oci_execute($find2);
 				echo "<table  class='table-center table-width' border='1'>\n";
@@ -105,6 +109,121 @@ function kategoriak($connection){
 			";
 		}
 	}
+}
+
+function keres($connection, $keres){
+	if(isset($keres)){
+		$select =("SELECT TERMEKEK.nev, VASARLASOK.VASARLO_EMAIL, VASARLASOK.FELVETEL, VASAROL.AR
+					FROM 
+						TERMEKEK 
+					JOIN VASAROL 
+						ON TERMEKEK.KOD = VASAROL.TERMEK_KOD
+					JOIN VASARLASOK 
+						ON VASAROL.VASARLAS_ID = VASARLASOK.ID
+					WHERE 
+						TERMEKEK.nev LIKE '%".$keres."%'");
+		$find = oci_parse($connection,$select);
+		oci_execute($find);
+		$counter = 0;
+		$row = oci_fetch_array($find, OCI_ASSOC+OCI_RETURN_NULLS);
+		echo "<div class='text-center'>";
+					echo "<h2>" . $row['NEV'] ."</h2>";
+		echo "</div>";
+		echo "<table  class='table-center table-width' border='1'>\n";
+				?><tr><th>Vásárló e-mail</th> <th> Rendelés ideje </th> <th> Ár </th> </tr><?php
+		while ($row = oci_fetch_array($find, OCI_ASSOC+OCI_RETURN_NULLS)){
+			echo "<tr>\n";
+				echo "<td>" .$row['VASARLO_EMAIL'] ."</td>";
+				echo " <td>" .$row['FELVETEL'] ."</td>";
+				echo " <td>" .$row['AR'] ." Ft</td>";
+			echo "</tr>\n";
+		}
+		echo "	</table>\n";
+	}
+}
+
+function varosonkenti_rendelt($connection){
+	$select =("SELECT IRANYITOSZAM.VAROS, VASARLASOK.ID, VASARLOK.NEV
+				FROM 
+					VASARLASOK 
+				JOIN VASARLOK 
+					ON VASARLOK.EMAIL = VASARLASOK.VASARLO_EMAIL
+				JOIN IRANYITOSZAM 
+					ON VASARLOK.IRANYITOSZAM = IRANYITOSZAM.IRANYITOSZAM
+				ORDER BY IRANYITOSZAM.VAROS");
+	$find = oci_parse($connection,$select);
+	oci_execute($find);
+	$counter = 0;
+	$row = oci_fetch_array($find, OCI_ASSOC+OCI_RETURN_NULLS);
+	echo " <p class='text-center'>A szállítások kilistázva városok szerint:</p>";
+	echo "<table  class='table-center table-width' border='1'>\n";
+			?><tr><th> Város </th> <th> Vásárlás azonosítója </th> <th> Vásárló neve </th> </tr><?php
+	while ($row = oci_fetch_array($find, OCI_ASSOC+OCI_RETURN_NULLS)){
+		echo "<tr>\n";
+			echo "<td class='text-center'>" .$row['VAROS'] ."</td>";
+			echo "<td class='text-center' width=20%>" .$row['ID'] ."</td>";
+			echo " <td class='text-center'>" .$row['NEV'] ."</td>";
+		echo "</tr>\n";
+	}
+	echo "	</table>\n";
+	echo " <br/>";
+}
+function rendelt_mennyiseg($connection){
+	$select =("SELECT 
+					SUM(VASAROL.MENNYISEG) AS OSSZESEN,
+					VASARLASOK.VASARLO_EMAIL
+				FROM 
+					VASAROL
+				JOIN 
+					VASARLASOK ON VASARLASOK.ID = VASAROL.VASARLAS_ID
+				GROUP BY 
+					VASARLASOK.VASARLO_EMAIL
+				ORDER BY
+					VASARLASOK.VASARLO_EMAIL");
+	$find = oci_parse($connection,$select);
+	oci_execute($find);
+	$counter = 0;
+	$row = oci_fetch_array($find, OCI_ASSOC+OCI_RETURN_NULLS);
+	echo " <p class='text-center'>Az egyes vásárlók által rendelt mennyiségek:</p>";
+	echo "<table  class='table-center table-width' border='1'>\n";
+			?><tr><th> Vásárló azonosítója </th> <th> Rendelt mennyiség </th> </tr><?php
+	while ($row = oci_fetch_array($find, OCI_ASSOC+OCI_RETURN_NULLS)){
+		echo "<tr>\n";
+			echo "<td class='text-center' width=30%>" .$row['VASARLO_EMAIL'] ."</td>";
+			echo "<td class='text-center' width=20%>" .$row['OSSZESEN'] ." db</td>";
+		echo "</tr>\n";
+	}
+	echo "	</table>";
+	echo " <br/>";
+}
+
+function fizetett_mennyiseg($connection){
+	$select =("SELECT 
+					SUM(VASAROL.AR) AS AR_OSSZ,
+					VASARLASOK.VASARLO_EMAIL
+				FROM 
+					VASAROL
+				JOIN 
+					VASARLASOK ON VASARLASOK.ID = VASAROL.VASARLAS_ID
+				GROUP BY 
+					VASARLASOK.VASARLO_EMAIL
+				ORDER BY
+					VASARLASOK.VASARLO_EMAIL");
+	$find = oci_parse($connection,$select);
+	oci_execute($find);
+	$counter = 0;
+	$row = oci_fetch_array($find, OCI_ASSOC+OCI_RETURN_NULLS);
+	echo " <p class='text-center'>Az egyes vásárlók által kifizetett értékek:</p>";
+	echo "<table  class='table-center table-width' border='1'>\n";
+			?><tr><th> Vásárló azonosítója </th> <th> Rendelt mennyiség </th> </tr><?php
+	while ($row = oci_fetch_array($find, OCI_ASSOC+OCI_RETURN_NULLS)){
+		echo "<tr>\n";
+			echo "<td class='text-center' width=30%>" .$row['VASARLO_EMAIL'] ."</td>";
+			echo "<td class='text-center' width=20%>" .$row['AR_OSSZ'] ." Ft</td>";
+		echo "</tr>\n";
+	}
+	echo "	</table>";
+	echo " <br/>";
 }
 
 function felhasznaloi_adatok($connection,$id)

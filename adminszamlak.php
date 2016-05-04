@@ -7,7 +7,7 @@
 	echo "<table class='table-center' border=\"1\">";
 ?>
 
-<tr><th>ÖSSZEG</th><th>Áfa</th><th>Számla sorszáma</th><th>Kiállítás dátuma</th><th>Vásrálás azonosítója</th><th>Vásárló neve</th><th>Vásárló lakhelye</th></tr>
+<tr><th>ÖSSZEG</th><th>Áfa</th><th>Számla sorszáma</th><th>Kiállítás dátuma</th><th>Vásárlás azonosítója</th><th>Vásárló neve</th><th>Vásárló lakhelye</th></tr>
 
 <?php
 	while ($row = oci_fetch_array($select, OCI_ASSOC+OCI_RETURN_NULLS)) {

@@ -8,6 +8,21 @@
 		$rendezes = trim( @$_POST['rendezes']);
 	}
 	$_SESSION['menu'] = "admin";
+	$keres = false;
+	if(isset($_GET['keres'])) $keres=$_GET['keres'];
+?>
+
+<p> Az adminnak lehetősége nyílik keresni a termékek között és kilistázni, hogy kik vásárolták meg, mikor és mennyiért.</p>
+<form method="post" <?php if (isset($_POST["keres"])){ echo "action=\"index.php?tartalom=admintermekek.php&menu=admin&keres=".$_POST["keres"]."\"";} ?>>
+	<input type="text" placeholder="Keresés" name="keres" id="keres"/>
+	<input type="submit" value="Keresés"/>
+</form>
+<?php 
+	if($keres !== false){
+		keres($conn,$keres);
+		$keres = false;
+	}
+	
 ?>
 <div id="termekadatok">
 	<p>Rendezés alapja:</p>

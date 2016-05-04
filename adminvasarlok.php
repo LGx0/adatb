@@ -35,8 +35,17 @@
 	echo "</table>\n";
 ?>
 
-
 <br/>
+<?php 
+	echo "<div class='text-center bal-doboz'>";
+			rendelt_mennyiseg($conn);
+	echo "</div>";
+	echo "<div class='text-center jobb-doboz'>";
+			fizetett_mennyiseg($conn);
+	echo "</div>";
+?>
+<br/>
+
 <form class="table-center" style="margin-bottom:20px" method="post" action="regel.php" >
 	<fieldset id="adminf" class="table-center"> 
 		<legend><b>Új vásárló felvétele</b></legend>
